@@ -14,4 +14,10 @@ M.base46 = {
 	-- },
 }
 
+M.ui = {
+  cmp = {
+    style = "atom_colored",
+  }
+}
+
 return M

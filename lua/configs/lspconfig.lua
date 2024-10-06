@@ -3,17 +3,28 @@ require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
--- EXAMPLE
-local servers = { "html", "cssls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
-  }
+local servers = {
+  html = {},
+  cssls = {},
+  ts_ls = {},
+  clangd = {},
+  gopls = {
+    settings = {
+      gopls = {
+        usePlaceholders = true,
+        staticcheck = true,
+      },
+    }
+  },
+}
+
+for lsp, opts in pairs(servers) do
+  opts.on_attach = nvlsp.on_attach
+  opts.capabilities = nvlsp.capabilities
+
+  lspconfig[lsp].setup(opts)
 end
 
 -- configuring single server, example: typescript
