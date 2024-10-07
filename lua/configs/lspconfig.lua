@@ -15,12 +15,16 @@ local servers = {
       gopls = {
         usePlaceholders = true,
         staticcheck = true,
+        analyses = {
+          ususedparams = true,
+        }
       },
     }
   },
 }
 
 for lsp, opts in pairs(servers) do
+  opts.on_init = nvlsp.on_init
   opts.on_attach = nvlsp.on_attach
   opts.capabilities = nvlsp.capabilities
 
