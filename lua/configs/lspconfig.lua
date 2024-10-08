@@ -21,6 +21,7 @@ local servers = {
       },
     }
   },
+  yamlls = {}
 }
 
 for lsp, opts in pairs(servers) do

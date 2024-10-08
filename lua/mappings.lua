@@ -7,7 +7,8 @@ local map = vim.keymap.set
 -- normal mode
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("n", "<C-Q>", "<cmd> wqall <cr>", { desc = "Save and quit all" })
-map("n", "<leader>fs", "<cmd> Telescope lsp_dynamic_workspace_symbols <cr>", { desc = "Find symbols" })
+map("n", "<leader>fS", "<cmd> Telescope lsp_dynamic_workspace_symbols <cr>", { desc = "Find symbols" })
+map("n", "<leader>fs", "<cmd> Telescope lsp_document_symbols <cr>", { desc = "Find symbols" })
 
 -- insert mode
 map("i", "jk", "<ESC>")

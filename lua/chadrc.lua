@@ -6,8 +6,16 @@
 local M = {}
 
 M.base46 = {
-	theme = "onedark",
+	theme = "rxyhn",
 
+  changed_themes = {
+    rxyhn = {
+      base_16 = {
+        base02 = "#2a3d43",
+        base03 = "#2a3d43",
+      }
+    }
+  }
 	-- hl_override = {
 	-- 	Comment = { italic = true },
 	-- 	["@comment"] = { italic = true },

@@ -14,13 +14,13 @@ return {
   },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  		  "vim", "lua", "vimdoc",
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim", "lua", "vimdoc",
         "html", "css", "go"
-  		},
-  	},
+      },
+    },
   },
 
   {
@@ -70,9 +70,9 @@ return {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-        require("nvim-surround").setup({
-            -- Configuration here, or leave empty to use defaults
-        })
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
     end
   },
 
@@ -95,6 +95,7 @@ return {
       ensure_installed = {
         "gopls",
         "staticcheck",
+        "yaml-language-server",
       }
     },
   },
@@ -102,5 +103,42 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     opts = require "configs.gitsigns"
-  }
+  },
+  {
+    "NeogitOrg/neogit",
+    cmd = { "Neogit" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua",              -- optional
+      "echasnovski/mini.pick",         -- optional
+    },
+    config = true
+  },
+
+  -- {
+  --   "nvim-telescope/telescope-fzf-native.nvim",
+  --   build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release"
+  -- },
+  --
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   opts = function()
+  --     local opts = {
+  --       extensions = {
+  --         fzf = {
+  --           fuzzy = true,
+  --           override_generic_sorter = true,
+  --           override_file_sorter = true,
+  --           case_mode = "smart_case",
+  --         }
+  --       }
+  --     }
+  --     require("telescope").load_extension("fzf")
+  --     return opts
+  --   end
+  -- }
 }
