@@ -119,10 +119,37 @@ return {
     config = true
   },
 
-  -- {
-  --   "nvim-telescope/telescope-fzf-native.nvim",
-  --   build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release"
-  -- },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make"
+  },
+
+  {
+    "Bekaboo/dropbar.nvim",
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePost' },
+    dependencies = {
+      "nvim-telescope/telescope-fzf-native.nvim",
+    },
+  },
+
+  {
+    "nvim-neotest/neotest",
+    cmd = { "Neotest" },
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      { "fredrikaverpil/neotest-golang", version = "*" },
+    },
+    config = function ()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-golang"),
+        },
+      })
+    end
+  },
   --
   -- {
   --   "nvim-telescope/telescope.nvim",

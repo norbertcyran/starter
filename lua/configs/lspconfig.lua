@@ -21,7 +21,15 @@ local servers = {
       },
     }
   },
-  yamlls = {}
+  yamlls = {
+    settings = {
+      yaml = {
+        schemas = {
+          kubernetes = "*.k8s.yaml"
+        }
+      }
+    }
+  }
 }
 
 for lsp, opts in pairs(servers) do
