@@ -11,10 +11,16 @@ M.base46 = {
   changed_themes = {
     rxyhn = {
       base_16 = {
-        base02 = "#2a3d43",
+      base02 = "#2a3d43",
         base03 = "#2a3d43",
-      }
-    }
+      },
+  },
+  },
+
+  integrations = { "rainbowdelimiters" },
+
+  hl_override = {
+    IblScopeChar = { fg = "light_grey" },
   }
 	-- hl_override = {
 	-- 	Comment = { italic = true },

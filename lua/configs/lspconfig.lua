@@ -14,7 +14,6 @@ local servers = {
     settings = {
       gopls = {
         usePlaceholders = true,
-        staticcheck = true,
         analyses = {
           ususedparams = true,
         }

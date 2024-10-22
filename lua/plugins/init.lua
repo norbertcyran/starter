@@ -1,7 +1,7 @@
 return {
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -94,7 +94,6 @@ return {
     opts = {
       ensure_installed = {
         "gopls",
-        "staticcheck",
         "yaml-language-server",
       }
     },
@@ -142,7 +141,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
       { "fredrikaverpil/neotest-golang", version = "*" },
     },
-    config = function ()
+    config = function()
       require("neotest").setup({
         adapters = {
           require("neotest-golang"),
@@ -150,6 +149,68 @@ return {
       })
     end
   },
+  {
+    'ldelossa/litee.nvim',
+    event = "VeryLazy",
+    opts = {
+      notify = { enabled = false },
+      panel = {
+        orientation = "bottom",
+        panel_size = 10,
+      },
+    },
+    config = function(_, opts) require('litee.lib').setup(opts) end
+  },
+
+  {
+    'ldelossa/litee-calltree.nvim',
+    dependencies = 'ldelossa/litee.nvim',
+    event = "VeryLazy",
+    opts = {
+      on_open = "panel",
+      map_resize_keys = false,
+      keymaps = {
+        toggle = "<tab>"
+      },
+    },
+    config = function(_, opts)
+      require('litee.calltree').setup(opts)
+      -- Highlight only while on calltree
+      vim.api.nvim_create_autocmd({ "WinEnter" }, {
+        desc = "Clear hls when leaving calltree",
+        callback = function()
+          vim.defer_fn(function()
+            if vim.bo.filetype == "calltree" then
+              vim.cmd(
+                "silent! hi LTSymbolJump ctermfg=015 ctermbg=110 cterm=italic,bold,underline guifg=#464646 guibg=#87afd7 gui=italic,bold")
+              vim.cmd(
+                "silent! hi LTSymbolJumpRefs ctermfg=015 ctermbg=110 cterm=italic,bold,underline guifg=#464646 guibg=#87afd7 gui=italic,bold")
+            else
+              vim.cmd("silent! highlight clear LTSymbolJump")
+              vim.cmd("silent! highlight clear LTSymbolJumpRefs")
+            end
+          end, 100)
+        end
+      })
+    end
+  },
+
+  {
+    "nvimtools/none-ls.nvim",
+    opts = function()
+      return require("configs.null-ls")
+    end,
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePost' },
+  },
+
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    event = "User FilePost",
+    config = function ()
+      dofile(vim.g.base46_cache .. "rainbowdelimiters")
+      require("rainbow-delimiters.setup").setup()
+    end
+  }
   --
   -- {
   --   "nvim-telescope/telescope.nvim",
